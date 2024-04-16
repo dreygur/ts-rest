@@ -1,3 +1,7 @@
+
+/**
+ * Triggers ApiError to be handled by errorHandler middleware.
+ */
 export default class ApiError extends Error {
   public status: number;
   public operational: boolean;

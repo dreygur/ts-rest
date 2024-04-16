@@ -1,6 +1,11 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 
-export default function (fn: (req: Request, res: Response, next: NextFunction) => void) {
+/**
+ * Makes a request error catchable
+ * @param fn Express Middleware
+ * @returns Express Middleware
+ */
+export default function (fn: RequestHandler): RequestHandler {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };

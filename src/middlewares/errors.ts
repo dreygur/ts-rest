@@ -2,6 +2,13 @@ import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
 import ApiError from '@app/errors/ApiError';
 
+/**
+ * Error Convrter to be parsable by the error handler
+ * @param err Error object
+ * @param req Request object
+ * @param res Response object
+ * @param next Next function
+ */
 export function converter(err: ApiError, req: Request, res: Response, next: NextFunction) {
   let error = err;
   if (!(error instanceof ApiError)) {
@@ -12,6 +19,13 @@ export function converter(err: ApiError, req: Request, res: Response, next: Next
   next(error);
 }
 
+/**
+ * Error Handler
+ * @param err Error object
+ * @param req Request object
+ * @param res Response object
+ * @param next Next function
+ */
 export function handler(err: ApiError, req: Request, res: Response, next: NextFunction) {
   let { status, message } = err;
   if (process.env.NODE_ENV === 'production' && !err.operational) {
@@ -31,5 +45,5 @@ export function handler(err: ApiError, req: Request, res: Response, next: NextFu
     console.error(err);
   }
 
-  res.status(status).send(response);
+  return res.status(status).send(response);
 }

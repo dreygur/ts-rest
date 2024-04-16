@@ -17,12 +17,36 @@
     // "noUnusedParameters": true,
     "skipLibCheck": true,
     "pretty": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "typeRoots": ["./src/typings", "node_modules/@types"],
     "lib": [
       "ES2020"
     ],
     "paths": {
+      "@/*": [
+        "./*"
+      ],
       "@app/*": [
         "./src/*"
+      ],
+      "@models/*": [
+        "./src/models/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@middlewares/*": [
+        "./src/middlewares/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@validations/*": [
+        "./src/validations/*"
       ]
     }
   },
