@@ -4,10 +4,10 @@ import winston from 'winston';
  * Enumerates over error messages
  */
 const enumerateErrorFormat = winston.format((info) => {
-    if (info instanceof Error) {
-        Object.assign(info, { message: info.stack });
-    }
-    return info;
+  if (info instanceof Error) {
+    Object.assign(info, { message: info.stack });
+  }
+  return info;
 });
 
 /**

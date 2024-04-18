@@ -1,10 +1,10 @@
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 config();
 
 import createServer from '@app/server';
 import app from '@app/app';
 import database from '@app/db';
-import dbInit from '@app/init';
+import init from '@models/index';
 import logger from '@app/utils/logger';
 
 const server = createServer(app);
@@ -13,7 +13,7 @@ const PORT = process.env.PORT as string || 3000;
 database.authenticate()
   .then(() => {
     logger.info('Connection to the database has been established successfully.');
-    dbInit();
+    init();
 
     // Initiate the application server
     server.listen(PORT, () => {
