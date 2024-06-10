@@ -1,6 +1,6 @@
 import morgan from 'morgan';
 import { Request, Response } from 'express';
-import logger from '@app/utils/logger';
+import logger from '../utils/logger';
 
 morgan.token('message', (req: Request, res: Response) => res.locals.errorMessage ?? '');
 

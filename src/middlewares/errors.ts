@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status';
-import ApiError from '@app/errors/ApiError';
+import ApiError from '..//errors/ApiError';
 
 /**
  * Error Convrter to be parsable by the error handler

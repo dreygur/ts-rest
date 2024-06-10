@@ -1,5 +1,5 @@
 #
-# Created this compose only for HoneyPSA
+# Created this compose only for My Projects
 # May not work for other applications
 # Use at your own risk
 # - Rakib
@@ -8,18 +8,18 @@ version: '3.1'
 
 services:
   db:
-    image: mysql:latest
+    image: mysql:5.7.40
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: 'honeypsa'
+      MYSQL_DATABASE: 'project'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     networks:
-      - honeypsa
+      - project
 
   phpmyadmin:
     image: phpmyadmin
@@ -27,7 +27,7 @@ services:
     ports:
       - 8080:80
     networks:
-      - honeypsa
+      - project
 networks:
-  honeypsa:
+  project:
     driver: bridge

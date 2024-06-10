@@ -10,7 +10,7 @@ const host = process.env.DB_HOST as string;
 
 // Sequelize Initialization
 const sequelize = new Sequelize(database, username, password, {
-  host, dialect, logging: false
+    host, dialect, logging: false
 });
 
 export default sequelize;

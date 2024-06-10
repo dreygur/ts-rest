@@ -1,3 +1,4 @@
+import { IRequestOptions } from "../interfaces";
 import { Request, Response, NextFunction, RequestHandler } from "express";
 
 /**
@@ -5,8 +6,9 @@ import { Request, Response, NextFunction, RequestHandler } from "express";
  * @param fn Express Middleware
  * @returns Express Middleware
  */
-export default function (fn: RequestHandler): RequestHandler {
+export default function (fn: RequestHandler, options?: IRequestOptions): RequestHandler {
   return (req: Request, res: Response, next: NextFunction) => {
+    req.options = options || {};
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 }

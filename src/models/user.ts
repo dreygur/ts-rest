@@ -1,10 +1,23 @@
 import { Model, DataTypes } from "sequelize";
 import bcrypt from "bcryptjs";
-import sequelize from "@app/db";
+import sequelize from "../db";
 
 class Users extends Model {
+  public id!: number;
   public email!: string;
   public password!: string;
+  public firstName!: string;
+  public lastName!: string;
+  public refreshToken!: string;
+  public accountVerified!: boolean;
+  public designation!: string;
+  public mfaDetails!: string;
+  public mfaEnabled!: boolean;
+  public phoneNumber!: string;
+  public role!: string;
+  public status!: string;
+  public skillInfo!: string;
+  public profilePhotoURL!: string;
 
   public comparePassword(passw: string, password: string, cb: (err: Error | null, isMatch?: boolean) => void) {
     bcrypt.compare(passw, password, function (err, isMatch) {
@@ -25,6 +38,9 @@ Users.init(
   {
     email: {
       type: DataTypes.STRING,
+      validate: {
+        isEmail: true
+      },
       allowNull: false,
     },
     password: {
@@ -44,7 +60,8 @@ Users.init(
       allowNull: true,
     },
     accountVerified: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     designation: {
       type: DataTypes.STRING,
@@ -53,7 +70,8 @@ Users.init(
       type: DataTypes.STRING,
     },
     mfaEnabled: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     phoneNumber: {
       type: DataTypes.STRING,
@@ -73,7 +91,7 @@ Users.init(
   },
   {
     sequelize,
-    modelName: "Users",
+    modelName: "user",
   }
 );
 

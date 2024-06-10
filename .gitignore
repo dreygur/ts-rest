@@ -1,1 +1,8 @@
+# Include any files or directories that you don't want to be copied to your
+# git repository here.
+
 node_modules
+mysql
+.env
+dist
+coverage

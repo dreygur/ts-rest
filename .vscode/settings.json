@@ -1,5 +1,7 @@
 {
-  "editor.tabSize": 2,
-  "editor.autoIndent": "keep",
-  "editor.formatOnSave": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
 }

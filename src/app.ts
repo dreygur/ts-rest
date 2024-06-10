@@ -4,13 +4,14 @@ import helmet from 'helmet';
 import status from 'http-status';
 import compression from 'compression';
 import passport from 'passport';
+import statusMonitor from 'express-status-monitor';
 
 // Local imports
-import router from '@app/routes/v2';
-import ApiError from '@app/errors/ApiError';
-import * as errors from '@app/middlewares/errors';
-import * as morgan from '@app/utils/morgan';
-import JWTStrategy from '@app/config/passport';
+import router from './routes/v1';
+import ApiError from './errors/ApiError';
+import * as errors from './middlewares/errors';
+import * as morgan from './utils/morgan';
+import JWTStrategy from './config/passport';
 
 const app = express();
 
@@ -32,13 +33,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan.successHandler);
 app.use(morgan.errorHandler);
 
+// Status Monitor
+app.use(statusMonitor({
+  title: 'Status Dashboard',
+  path: '/api/status',
+}));
+
 // JWT Authentication
 app.use(passport.initialize());
 // app.use(passport.session());
 passport.use('jwt', JWTStrategy);
 
 // Serve v1 routes
-app.use('/api/v2', router);
+app.use('/api/v1', router);
 
 // Custom 404
 app.use((req: Request, res: Response, next: NextFunction) => {

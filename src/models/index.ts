@@ -1,7 +1,21 @@
-import Users from '@models/user';
-const isDev = process.env.NODE_ENV === 'development'
+import Users from './user';
 
-const models = [Users];
-export default function init() {
-  models.forEach(model => model.sync({ alter: isDev }));
+const isDev = process.env.NODE_ENV === 'development';
+
+/**
+ * IMPORTANT: The order of the Models is important
+ * to ensure the initial Table Creations
+ */
+const models = [
+    Users
+];
+
+export default async function init() {
+    if (isDev) {
+        for (const model of models) {
+            await model.sync({ alter: isDev });
+        }
+    } else {
+        await Promise.all(models.map((model: any) => model.sync()));
+    }
 }
