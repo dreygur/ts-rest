@@ -1,4 +1,3 @@
-import passport from 'passport';
 import { Strategy as JWTStrategy, ExtractJwt, StrategyOptionsWithoutRequest, VerifiedCallback } from 'passport-jwt';
 
 const options: StrategyOptionsWithoutRequest = {
